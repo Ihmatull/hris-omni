@@ -26,21 +26,21 @@
                 <div class="col-md-4 col-md-offset-4">
                     <form action="" method="post">
                         <?php
-                        $this->db->select('nama_pegawai,divisi_id,users.id as user_id');
-                        $this->db->from('users');
-                        $this->db->join('divisi', 'users.divisi_id = divisi.id_divisi');
+                        $this->db->select('nama_pegawai,id_divisi,user.id_user as id_user');
+                        $this->db->from('user');
+                        $this->db->join('divisi', 'user.id_divisi = divisi.id_divisi');
                         $this->db->where('username', $this->session->userdata('username'));
                         $result = $this->db->get()->row_array();
                         ?>
                         <div class="form-group">
                             <label for="nama_pegawai">Nama Pegawai</label>
-                            <select class="js-example-basic-single" style="width: 338px;" name="nama_pegawai">
+                            <select class="form-control select2" style="width: 338px;" name="nama_pegawai">
                                 <option></option>
                                 <?php foreach ($users as $user) : ?>
-                                    <?php if ($user['id'] == $result['user_id']) : ?>
-                                        <option value="<?= $user['id']; ?>" selected><?= $user['nama_pegawai']; ?></option>
+                                    <?php if ($user['id_user'] == $result['id_user']) : ?>
+                                        <option value="<?= $user['id_user']; ?>" selected><?= $user['nama_pegawai']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $user['id']; ?>"><?= $user['nama_pegawai']; ?></option>
+                                        <option value="<?= $user['id_user']; ?>"><?= $user['nama_pegawai']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
@@ -50,10 +50,10 @@
                             <select class="form-control" name="divisi" id="divisi">
                                 <option></option>
                                 <?php foreach ($divisies as $divisi) : ?>
-                                    <?php if ($divisi['id_divisi'] == $result['divisi_id']) : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['divisi_d']; ?></option>
+                                    <?php if ($divisi['id_divisi'] == $result['id_divisi']) : ?>
+                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['ket_divisi']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['divisi_d']; ?></option>
+                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['ket_divisi']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
@@ -109,7 +109,6 @@
 
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
         $('.input-tanggal-mulai').datepicker();
         $('.input-tanggal-sampai').datepicker();
     });

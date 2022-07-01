@@ -69,7 +69,7 @@ class Profile extends CI_Controller
                 ]
             ];
         } else {
-            $data_user = $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array();
+            $data_user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
             $msg = [
                 "cek_username" => $this->session->userdata('username'),
                 "cek_password" => password_verify($password_sekarang, $data_user['password']),
@@ -88,7 +88,7 @@ class Profile extends CI_Controller
 
             $this->db->set('password', password_hash($password_baru, PASSWORD_DEFAULT));
             $this->db->where('username', $username);
-            $this->db->update('users');
+            $this->db->update('user');
 
             $msg = [
                 'status' => 200,
@@ -118,7 +118,7 @@ class Profile extends CI_Controller
                 ]
             ];
         } else {
-            $data_user = $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array();
+            $data_user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
             $msg = [
                 "cek_password" => password_verify($password, $data_user['password']),
                 "cek_username_sekarang" => $this->session->userdata('username'),
@@ -135,7 +135,7 @@ class Profile extends CI_Controller
 
             $this->db->set('username', $username_baru);
             $this->db->where('username', $this->session->userdata('username'));
-            $this->db->update('users');
+            $this->db->update('user');
 
             $msg = [
                 'status' => 200,
@@ -146,7 +146,7 @@ class Profile extends CI_Controller
         }
     }
 
-    public function edit_img_profile($id)
+    public function edit_img_profile($id_user)
     {
         $config = [
             'upload_path' => './uploads',
@@ -160,8 +160,8 @@ class Profile extends CI_Controller
         } else {
             $new_img = $this->upload->data('file_name');
             $this->db->set('gambar', $new_img);
-            $this->db->where('id', $id);
-            $this->db->update('users');
+            $this->db->where('id_user', $id_user);
+            $this->db->update('user');
 
             if ($this->db->affected_rows() > 0) {
                 echo "<script>
@@ -174,15 +174,15 @@ class Profile extends CI_Controller
 
     public function get_data_user()
     {
-        $user_id = $this->session->userdata('id_user');
-        $this->db->select('divisi_d,nama_pegawai');
-        $this->db->join('divisi', 'users.divisi_id = divisi.id_divisi');
-        $this->db->where('id', $user_id);
-        $data_users = $this->db->get('users')->row_array();
+        $id_user = $this->session->userdata('id_user');
+        $this->db->select('ket_divisi,nama_pegawai');
+        $this->db->join('divisi', 'user.id_divisi = divisi.id_divisi');
+        $this->db->where('id_user', $id_user);
+        $data_user = $this->db->get('user')->row_array();
         if ($this->input->is_ajax_request()) {
             $data = [
-                "data_users" => $data_users,
-                "data_karyawan" => $this->db->get_where("data_karyawan", ["user_id" => $user_id])->row_array()
+                "data_user" => $data_user,
+                "data_karyawan" => $this->db->get_where("data_karyawan", ["id_user" => $id_user])->row_array()
             ];
             echo json_encode($data);
         }
@@ -213,8 +213,8 @@ class Profile extends CI_Controller
             } else {
                 // edit nama
                 $this->db->set('nama_pegawai', $nama_pegawai);
-                $this->db->where('id', $this->session->userdata('id_user'));
-                $this->db->update('users');
+                $this->db->where('id_user', $this->session->userdata('id_user'));
+                $this->db->update('user');
 
                 // edit data_karyawan
                 // $data = [
@@ -233,7 +233,7 @@ class Profile extends CI_Controller
                 $this->db->set('alamat', $alamat);
                 $this->db->set('nohp', $nohp);
                 $this->db->set('email', $email);
-                $this->db->where('user_id', $this->session->userdata("id_user"));
+                $this->db->where('id_user', $this->session->userdata("id_user"));
                 $this->db->update("data_karyawan");
 
                 $msg = [

@@ -13,7 +13,7 @@
 <section class="content">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Data Users</h3>
+            <h3 class="box-title">Edit Data Users</h3>
             <div class="pull-right">
                 <a href="<?= site_url('user') ?>" class="btn btn-warning btn-flat">
                     <i class="fa fa-undo"></i> Back
@@ -24,15 +24,6 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <form action="" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <img src="<?= base_url(); ?>uploads/<?= $user_by_id['gambar']; ?>" width="120" alt="">
-                        </div>
-                        <div class="form-group">
-                            <label for="gambar">Foto Profile</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" value="<?= $user_by_id['gambar']; ?>" name="gambar" id="gambar">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="nama_pegawai">Nama Pegawai</label>
                             <input type="text" class="form-control" value="<?= $user_by_id['nama_pegawai']; ?>" name="nama_pegawai" id="nama_pegawai" placeholder="Nama Pegawai">
@@ -49,10 +40,10 @@
                             <select class="form-control" name="divisi" id="divisi">
                                 <option>--Pilih--</option>
                                 <?php foreach ($divisies as $divisi) : ?>
-                                    <?php if ($user_by_id['divisi_id'] == $divisi['id_divisi']) : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['divisi_d']; ?></option>
+                                    <?php if ($user_by_id['id_divisi'] == $divisi['id_divisi']) : ?>
+                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['ket_divisi']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['divisi_d']; ?></option>
+                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['ket_divisi']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
@@ -62,10 +53,10 @@
                             <select class="form-control" name="level" id="level">
                                 <option>--Pilih--</option>
                                 <?php foreach ($levels as $level) : ?>
-                                    <?php if ($user_by_id['level_id'] == $level['id']) : ?>
-                                        <option value="<?= $level['id']; ?>" selected><?= $level['level']; ?></option>
+                                    <?php if ($user_by_id['id_level'] == $level['id_level']) : ?>
+                                        <option value="<?= $level['id_level']; ?>" selected><?= $level['ket_level']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $level['id']; ?>"><?= $level['level']; ?></option>
+                                        <option value="<?= $level['id_level']; ?>"><?= $level['ket_level']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>

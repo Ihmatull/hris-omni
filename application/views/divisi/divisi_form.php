@@ -43,8 +43,8 @@
                         </div>
                         <div class="form-group ">
                             <label for="username">Divisi <small class="text-danger">*</small></label>
-                            <input type="varchar" name="divisi_d" value="<?= set_value('divisi_d'); ?>" class="form-control">
-                            <small class="text-danger"><?= form_error('divisi_d'); ?></small>
+                            <input type="varchar" name="ket_divisi" value="<?= set_value('ket_divisi'); ?>" class="form-control">
+                            <small class="text-danger"><?= form_error('ket_divisi'); ?></small>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-flat">

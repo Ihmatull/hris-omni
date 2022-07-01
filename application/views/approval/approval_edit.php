@@ -30,10 +30,10 @@
                             <select class="js-example-basic-single" style="width: 338px;" name="nama_pegawai">
                                 <option></option>
                                 <?php foreach ($users as $user) : ?>
-                                    <?php if ($cuti_by_id['user_id'] == $user['id']) : ?>
-                                        <option value="<?= $user['id']; ?>" selected><?= $user['nama_pegawai']; ?></option>
+                                    <?php if ($cuti_by_id['id_user'] == $user['id_user']) : ?>
+                                        <option value="<?= $user['id_user']; ?>" selected><?= $user['nama_pegawai']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $user['id']; ?>"><?= $user['nama_pegawai']; ?></option>
+                                        <option value="<?= $user['id_user']; ?>"><?= $user['nama_pegawai']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
@@ -44,10 +44,10 @@
                             <select class="form-control" name="divisi" id="divisi">
                                 <option></option>
                                 <?php foreach ($divisies as $divisi) : ?>
-                                    <?php if ($cuti_by_id['divisi_id'] == $divisi['id_divisi']) : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['divisi_d']; ?></option>
+                                    <?php if ($cuti_by_id['id_divisi'] == $divisi['id_divisi']) : ?>
+                                        <option value="<?= $divisi['id_divisi']; ?>" selected><?= $divisi['ket_divisi']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['divisi_d']; ?></option>
+                                        <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['ket_divisi']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group">
                             <label for="divisi">Keperluan Curi</label>
-                            <select class="form-control" name="keperluan" id="keperluan" data-userid="<?= $cuti_by_id['user_id'] ?>" data-keperluan="<?= $cuti_by_id['keperluan'] ?>">
+                            <select class="form-control" name="keperluan" id="keperluan" data-userid="<?= $cuti_by_id['id_user'] ?>" data-keperluan="<?= $cuti_by_id['keperluan'] ?>">
                                 <option></option>
                                 <?php if ($cuti_by_id['keperluan'] == "Cuti Sakit") : ?>
                                     <option value="Cuti Sakit" selected>Cuti Sakit</option>

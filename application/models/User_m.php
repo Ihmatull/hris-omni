@@ -15,10 +15,10 @@ class User_m extends CI_Model
 
     public function get($username = null)
     {
-        $this->db->select('divisi.divisi_d, level.level, users.*');
-        $this->db->from('users');
-        $this->db->join('divisi','users.divisi_id = divisi.id_divisi');
-        $this->db->join('level','users.level_id = level.id');
+        $this->db->select('divisi.ket_divisi, level.ket_level, user.*');
+        $this->db->from('user');
+        $this->db->join('divisi', 'user.id_divisi = divisi.id_divisi');
+        $this->db->join('level', 'user.id_level = level.id_level');
         if ($username != null) {
             $this->db->where('username', $username);
         }
@@ -53,7 +53,7 @@ class User_m extends CI_Model
 
     public function del($id)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('users');
+        $this->db->where('id_user', $id);
+        $this->db->delete('user');
     }
 }

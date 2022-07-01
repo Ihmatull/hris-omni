@@ -21,7 +21,7 @@ class User extends CI_Controller
     public function add_user()
     {
 
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
@@ -29,7 +29,7 @@ class User extends CI_Controller
         ];
 
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');
         $this->form_validation->set_rules(
             'password',
             'Password',
@@ -63,10 +63,10 @@ class User extends CI_Controller
                     'username' => $this->input->post('username'),
                     'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                     // 'password' => $this->input->post('password'),
-                    'divisi_id' => $this->input->post('divisi'),
-                    'level_id' => $this->input->post('level')
+                    'id_divisi' => $this->input->post('divisi'),
+                    'id_level' => $this->input->post('level')
                 ];
-                $this->db->insert('users', $data_post);
+                $this->db->insert('user', $data_post);
                 if ($this->db->affected_rows() > 0) {
                     echo "<script>
                         alert('Data user berhasil ditambahkan');
@@ -81,10 +81,10 @@ class User extends CI_Controller
                     'gambar' => $new_img,
                     'username' => $this->input->post('username'),
                     'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                    'divisi_id' => $this->input->post('divisi'),
-                    'level_id' => $this->input->post('level')
+                    'id_divisi' => $this->input->post('divisi'),
+                    'id_level' => $this->input->post('level')
                 ];
-                $this->db->insert('users', $data_post);
+                $this->db->insert('user', $data_post);
                 if ($this->db->affected_rows() > 0) {
                     echo "<script>
                         alert('Data user berhasil ditambahkan');
@@ -99,12 +99,12 @@ class User extends CI_Controller
 
     public function edit_user($id)
     {
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
             'levels' => $this->db->get('level')->result_array(),
-            'user_by_id' => $this->db->get_where('users', ['id' => $id])->row_array()
+            'user_by_id' => $this->db->get_where('user', ['id_user' => $id])->row_array()
         ];
 
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
@@ -123,11 +123,11 @@ class User extends CI_Controller
                     'nama_pegawai' => $this->input->post('nama_pegawai'),
                     'username' => $this->input->post('username'),
                     'password' => $this->input->post('password'),
-                    'divisi_id' => $this->input->post('divisi'),
-                    'level_id' => $this->input->post('level')
+                    'id_divisi' => $this->input->post('divisi'),
+                    'id_level' => $this->input->post('level')
                 ];
-                $this->db->where('id', $id);
-                $this->db->update('users', $data_post);
+                $this->db->where('id_user', $id);
+                $this->db->update('user', $data_post);
                 if ($this->db->affected_rows() > 0) {
                     echo "<script>
                             alert('Data user berhasil ubah');
@@ -141,11 +141,11 @@ class User extends CI_Controller
                     'gambar' => 'default.png',
                     'username' => $this->input->post('username'),
                     'password' => $this->input->post('password'),
-                    'divisi_id' => $this->input->post('divisi'),
-                    'level_id' => $this->input->post('level')
+                    'id_divisi' => $this->input->post('divisi'),
+                    'id_level' => $this->input->post('level')
                 ];
-                $this->db->where('id', $id);
-                $this->db->update('users', $data_post);
+                $this->db->where('id_user', $id);
+                $this->db->update('user', $data_post);
                 if ($this->db->affected_rows() > 0) {
                     echo "<script>
                             alert('Data user berhasil ubah');

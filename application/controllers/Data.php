@@ -21,7 +21,7 @@ class Data extends CI_Controller
     {
         $data = array(
             'page' => 'add',
-            'users' => $this->db->get('users')->result_array(),
+            'users' => $this->db->get('user')->result_array(),
             'cities' => $this->db->get('cities')->result_array()
         );
 
@@ -39,7 +39,7 @@ class Data extends CI_Controller
             $this->template->load('template', 'data/data_form', $data);
         } else {
             $data_post = [
-                'user_id' => $this->input->post('nama_pegawai'),
+                'id_user' => $this->input->post('nama_pegawai'),
                 'tgl_masuk' => $this->input->post('tgl_masuk'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'tempat_lahir' => $this->input->post('kota'),
@@ -49,7 +49,7 @@ class Data extends CI_Controller
                 'email' => $this->input->post('email'),
             ];
 
-            $cek_user = $this->db->get_where('data_karyawan', ['user_id' => $this->input->post('nama_pegawai')])->row_array();
+            $cek_user = $this->db->get_where('data_karyawan', ['id_user' => $this->input->post('nama_pegawai')])->row_array();
             if (is_null($cek_user)) {
                 $this->db->insert('data_karyawan', $data_post);
                 if ($this->db->affected_rows() > 0) {
@@ -71,9 +71,9 @@ class Data extends CI_Controller
     {
         $data = array(
             'page' => 'add',
-            'users' => $this->db->get('users')->result_array(),
+            'user' => $this->db->get('user')->result_array(),
             'cities' => $this->db->get('cities')->result_array(),
-            'user_by_id' => $this->db->get_where('data_karyawan', ['id' => $id])->row_array()
+            'user_by_id' => $this->db->get_where('data_karyawan', ['id_pegawai' => $id])->row_array()
         );
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
         $this->form_validation->set_rules('kota', 'Kota', 'required|trim');
@@ -88,7 +88,7 @@ class Data extends CI_Controller
             $this->template->load('template', 'data/data_form_edit', $data);
         } else {
             $data_post = [
-                'user_id' => $this->input->post('nama_pegawai'),
+                'id_user' => $this->input->post('nama_pegawai'),
                 'tgl_masuk' => $this->input->post('tgl_masuk'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'tempat_lahir' => $this->input->post('kota'),
@@ -98,7 +98,7 @@ class Data extends CI_Controller
                 'email' => $this->input->post('email'),
             ];
 
-            $this->db->where('id', $id);
+            $this->db->where('id_pegawai', $id);
             $this->db->update('data_karyawan', $data_post);
             echo "<script>
                     alert('Data karyawan berhasil ubah');
@@ -121,9 +121,9 @@ class Data extends CI_Controller
     //     echo "<script>window.location='" . site_url('data') . "';</script>";
     // }
 
-    public function del($id)
+    public function del($id_pegawai)
     {
-        $this->data_m->del($id);
+        $this->data_m->del($id_pegawai);
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('Data berhasil dihapus');</script>";
         }

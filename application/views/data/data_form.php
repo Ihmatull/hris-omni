@@ -27,10 +27,10 @@
                     <form action="<?= site_url('data/add') ?>" method="POST">
                         <div class="form-group">
                             <label for="nama_pegawai">Nama Pegawai <small class="text-danger">*</small></label>
-                            <select class="js-example-basic-single" style="width: 338px;" name="nama_pegawai" value="<?= set_value('tgl_masuk'); ?>">
+                            <select class="form-control select2" style="width: 338px;" name="nama_pegawai" value="<?= set_value('tgl_masuk'); ?>">
                                 <option></option>
                                 <?php foreach ($users as $user) : ?>
-                                    <option value="<?= $user['id']; ?>"><?= $user['nama_pegawai']; ?></option>
+                                    <option value="<?= $user['id_user']; ?>"><?= $user['nama_pegawai']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger"><?= form_error('nama_pegawai'); ?></small>
@@ -92,8 +92,3 @@
         </div>
     </div>
 </section>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>

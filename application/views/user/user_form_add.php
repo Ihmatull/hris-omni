@@ -13,7 +13,7 @@
 <section class="content">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Data Users</h3>
+            <h3 class="box-title">Tambah Data Users</h3>
             <div class="pull-right">
                 <a href="<?= site_url('user') ?>" class="btn btn-warning btn-flat">
                     <i class="fa fa-undo"></i> Back
@@ -56,7 +56,7 @@
                             <select class="form-control" name="divisi" id="divisi">
                                 <option>--Pilih--</option>
                                 <?php foreach ($divisies as $divisi) : ?>
-                                    <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['divisi_d']; ?></option>
+                                    <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['ket_divisi']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -65,7 +65,7 @@
                             <select class="form-control" name="level" id="level">
                                 <option>--Pilih--</option>
                                 <?php foreach ($levels as $level) : ?>
-                                    <option value="<?= $level['id']; ?>"><?= $level['level']; ?></option>
+                                    <option value="<?= $level['id_level']; ?>"><?= $level['ket_level']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

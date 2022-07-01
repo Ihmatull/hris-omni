@@ -20,7 +20,7 @@ class Divisi extends CI_Controller
     public function add()
     {
         $this->form_validation->set_rules('no_divisi', 'No. Divisi', 'required');
-        $this->form_validation->set_rules('divisi_d', 'Divisi', 'required');
+        $this->form_validation->set_rules('ket_divisi', 'Divisi', 'required');
 
         $this->form_validation->set_message('required', '%s masih kosong, silahkan diisi');
 
@@ -30,7 +30,7 @@ class Divisi extends CI_Controller
         } else {
             $divisi_post = [
                 'no_divisi' => $this->input->post('no_divisi'),
-                'divisi_d' => $this->input->post('divisi_d'),
+                'ket_divisi' => $this->input->post('ket_divisi'),
             ];
 
             $cek_user = $this->db->get_where('divisi', ['no_divisi' => $this->input->post('no_divisi')])->row_array();
@@ -54,7 +54,7 @@ class Divisi extends CI_Controller
         // $divisi = new stdClass();
         // $divisi->id_divisi = null;
         // $divisi->no_divisi = null;
-        // $divisi->divisi_d = null;
+        // $divisi->ket_divisi = null;
         // $data = array(
         // 'page' => 'add',
         //'row' => $divisi,
@@ -69,12 +69,10 @@ class Divisi extends CI_Controller
     {
         $data = array(
             'page' => 'add',
-            'divisi_by_id' => $this->db->get_where('divisi', ['id' => $id])->row_array()
+            'divisi_by_id' => $this->db->get_where('divisi', ['id_divisi' => $id])->row_array()
         );
         $this->form_validation->set_rules('no_divisi', 'No. Divisi', 'required');
-        $this->form_validation->set_rules('divisi_d', 'Divisi', 'required');
-
-        $this->form_validation->set_message('required', '%s masih kosong, silahkan diisi');
+        $this->form_validation->set_rules('ket_divisi', 'Divisi', 'required');
 
 
         if ($this->form_validation->run() == false) {
@@ -82,10 +80,10 @@ class Divisi extends CI_Controller
         } else {
             $divisi_post = [
                 'no_divisi' => $this->input->post('no_divisi'),
-                'div' => $this->input->post('divisi_d'),
+                'ket_divisi' => $this->input->post('ket_divisi'),
             ];
 
-            $this->db->where('id', $id);
+            $this->db->where('id_divisi', $id);
             $this->db->update('divisi', $divisi_post);
             echo "<script>
                     alert('Data departemen berhasil ubah');
@@ -124,9 +122,9 @@ class Divisi extends CI_Controller
     //echo "<script>window.location='" . site_url('divisi') . "';</script>";
     //}
 
-    public function del($id)
+    public function del($id_divisi)
     {
-        $this->divisi_m->del($id);
+        $this->divisi_m->del($id_divisi);
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('Data berhasil dihapus');</script>";
         }

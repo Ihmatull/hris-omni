@@ -13,7 +13,7 @@
 <section class="content">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title"><?= ucfirst($page) ?> Karyawan</h3>
+            <h3 class="box-title">Edit Karyawan</h3>
             <div class="pull-right">
                 <a href="<?= site_url('data') ?>" class="btn btn-warning btn-flat">
                     <i class="fa fa-undo"></i> Back
@@ -25,30 +25,35 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <form action="" method="POST">
-                        <div class="form-group">
-                            <label for="username">Nama Pegawai <small class="text-danger">*</small></label>
-                            <select class="js-example-basic-single" style="width: 338px;" name="nama_pegawai">
+                        <!--<div class="form-group">
+                            <label for="nama_pegawai">Nama Pegawai <small class="text-danger">*</small></label>
+                            <select class="form-control select2" style="width: 338px;" name="nama_pegawai">
                                 <option></option>
                                 <?php foreach ($users as $user) : ?>
-                                    <?php if ($user_by_id['user_id'] == $user['id']) : ?>
-                                        <option value="<?= $user['id']; ?>" selected><?= $user['nama_pegawai']; ?></option>
+                                    <?php if ($user_by_id['id_user'] == $user['id_user']) : ?>
+                                        <option value="<?= $user['id_user']; ?>" selected><?= $user['nama_pegawai']; ?></option>
                                     <?php else : ?>
-                                        <option value="<?= $user['id']; ?>"><?= $user['nama_pegawai']; ?></option>
+                                        <option value="<?= $user['id_user']; ?>"><?= $user['nama_pegawai']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger"><?= form_error('nama_pegawai'); ?></small>
+                        </div>-->
+                        <div class="form-group ">
+                            <label for="nama_pegawai">Nama Pegawai <small class="text-danger">*</small></label>
+                            <input type="text" name="id_user" value="<?= $user_by_id['nama_pegawai']; ?>" class="form-control select2">
+                            <small class="text-danger"><?= form_error('nama_pegawai'); ?></small>
                         </div>
                         <div class="form-group ">
-                            <label for="username">Tanggal Masuk <small class="text-danger">*</small></label>
-                            <input type="date" name="tgl_masuk" value="<?= $user_by_id['tgl_masuk']; ?>" class="form-control">
+                            <label for="tgl_masuk">Tanggal Masuk <small class="text-danger">*</small></label>
+                            <input type="varchar" name="tgl_masuk" value="<?= $user_by_id['tgl_masuk']; ?>" class="form-control">
                         </div>
                         <div class="form-group ">
-                            <label for="username">Tanggal Lahir <small class="text-danger">*</small></label>
-                            <input type="date" name="tgl_lahir" value="<?= $user_by_id['tgl_lahir']; ?>" class="form-control">
+                            <label for="tgl_lahir">Tanggal Lahir <small class="text-danger">*</small></label>
+                            <input type="varchar" name="tgl_lahir" value="<?= $user_by_id['tgl_lahir']; ?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="username">Kota Lahir <small class="text-danger">*</small></label>
+                            <label for="kota">Kota Lahir <small class="text-danger">*</small></label>
                             <select class="js-example-basic-single" style="width: 338px;" name="kota">
                                 <option></option>
                                 <?php foreach ($cities as $city) : ?>
@@ -94,12 +99,12 @@
                         </div>
                         <div class="form-group ">
                             <label>Nomor Hp <small class="text-danger">*</small></label>
-                            <input type="text" name="nohp" value="<?= $user_by_id['nohp'] ?>" class="form-control">
+                            <input type="varchar" name="nohp" value="<?= $user_by_id['nohp'] ?>" class="form-control">
                             <small class="text-danger"><?= form_error('nohp'); ?></small>
                         </div>
                         <div class="form-group ">
                             <label>Email</label>
-                            <input type="text" name="email" value="<?= $user_by_id['email'] ?>" class="form-control">
+                            <input type="email" name="email" value="<?= $user_by_id['email'] ?>" class="form-control">
                             <small class="text-danger"><?= form_error('email'); ?></small>
                         </div>
                         <div class="form-group">
@@ -114,8 +119,8 @@
         </div>
     </div>
 </section>
-<script>
+<!---<script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
-</script>
+</script>-->

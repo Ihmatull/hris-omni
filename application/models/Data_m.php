@@ -6,8 +6,8 @@ class Data_m extends CI_Model
 
     public function get()
     {
-        $this->db->select('users.nama_pegawai, data_karyawan.*');
-        $this->db->join('users', 'data_karyawan.user_id = users.id');
+        $this->db->select('user.nama_pegawai, data_karyawan.*');
+        $this->db->join('user', 'data_karyawan.id_user = user.id_user');
         $query = $this->db->get('data_karyawan')->result_array();
         return $query;
     }
@@ -30,7 +30,7 @@ class Data_m extends CI_Model
 
     public function del($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('id_pegawai', $id);
         $this->db->delete('data_karyawan');
     }
 }

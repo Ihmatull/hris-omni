@@ -25,7 +25,7 @@
                             <select class="js-example-basic-single" style="width: 338px;" name="nama_pegawai">
                                 <option></option>
                                 <?php foreach ($users as $user) : ?>
-                                    <option value="<?= $user['id']; ?>"><?= $user['nama_pegawai']; ?></option>
+                                    <option value="<?= $user['id_cuti']; ?>"><?= $user['nama_pegawai']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger"><?= form_error('nama_pegawai'); ?></small>
@@ -35,7 +35,7 @@
                             <select class="form-control" name="divisi" id="divisi">
                                 <option></option>
                                 <?php foreach ($divisies as $divisi) : ?>
-                                    <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['divisi_d']; ?></option>
+                                    <option value="<?= $divisi['id_divisi']; ?>"><?= $divisi['kett_divisi']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger"><?= form_error('divisi'); ?></small>

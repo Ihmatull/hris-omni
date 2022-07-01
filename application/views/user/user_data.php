@@ -40,14 +40,14 @@
                             <td><?= $no++ ?>.</td>
                             <td><?= $data->username ?></td>
                             <td><?= $data->nama_pegawai ?></td>
-                            <td><?= $data->divisi_d ?></td>
-                            <td><?= $data->level ?></td>
+                            <td><?= $data->ket_divisi ?></td>
+                            <td><?= $data->ket_level ?></td>
                             <td class="text-center" width="160px">
                                 <!-- <form action="<?= site_url('user/del') ?>" method="post"> -->
-                                <a href="<?= site_url('user/edit_user/' . $data->id) ?>" class="btn btn-primary btn-xs">
+                                <a href="<?= site_url('user/edit_user/' . $data->id_user) ?>" class="btn btn-primary btn-xs">
                                     <i class="fa fa-pencil"></i> Update
                                 </a>
-                                <a href="<?= site_url('user/del_user/' . $data->id) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                <a href="<?= site_url('user/del_user/' . $data->id_user) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                                 <!-- </form> -->

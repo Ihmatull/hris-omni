@@ -85,12 +85,12 @@
         type: "get",
         dataType: "json",
         success: function(data) {
-            $("[name='nama_pegawai']").val(data.data_users.nama_pegawai);
-            $("[name='divisi']").val(data.data_users.divisi_d);
+            $("[name='nama_pegawai']").val(data.data_user.nama_pegawai);
+            $("[name='divisi']").val(data.data_user.ket_divisi);
             $("[name='tgl_masuk']").val(data.data_karyawan.tgl_masuk);
             $("[name='tgl_lahir']").val(data.data_karyawan.tgl_lahir);
             $("[name='tempat_lahir']").val(data.data_karyawan.tempat_lahir);
-            $('input:radio[name=jenis_kelamin][value='+data.data_karyawan.jenis_kelamin+']')[0].checked = true;
+            $('input:radio[name=jenis_kelamin][value=' + data.data_karyawan.jenis_kelamin + ']')[0].checked = true;
             $("[name='alamat']").val(data.data_karyawan.alamat);
             $("[name='nohp']").val(data.data_karyawan.nohp);
             $("[name='email']").val(data.data_karyawan.email);

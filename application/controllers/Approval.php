@@ -19,12 +19,12 @@ class Approval extends CI_Controller
 
     public function add()
     {
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
             'levels' => $this->db->get('level')->result_array(),
-            'users' => $this->db->get('users')->result_array()
+            'users' => $this->db->get('user')->result_array()
         ];
 
 
@@ -39,14 +39,14 @@ class Approval extends CI_Controller
             $this->template->load('template', 'approval/approval_add', $data);
         } else {
             $data_cuti = [
-                'user_id' => $this->input->post('nama_pegawai'),
-                'divisi_id' => $this->input->post('divisi'),
+                'id_user' => $this->input->post('nama_pegawai'),
+                'id_divisi' => $this->input->post('divisi'),
                 'keperluan' => $this->input->post('keperluan'),
                 'lama' => $this->input->post('lama'),
                 'tgl_mulai' => $this->input->post('tgl_mulai'),
                 'tgl_sampai' => $this->input->post('tgl_sampai'),
                 'keterangan' => $this->input->post('keterangan'),
-                'status' => $this->session->userdata('level_id') == 1 ? 1 : 2
+                'status' => $this->session->userdata('id_level') == 1 ? 1 : 2
             ];
 
             $this->db->insert('pengajuan_cuti', $data_cuti);
@@ -59,15 +59,15 @@ class Approval extends CI_Controller
         }
     }
 
-    public function edit($id)
+    public function edit($id_cuti)
     {
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
             'levels' => $this->db->get('level')->result_array(),
-            'users' => $this->db->get('users')->result_array(),
-            'cuti_by_id' => $this->db->get_where('pengajuan_cuti', ['id' => $id])->row_array()
+            'users' => $this->db->get('user')->result_array(),
+            'cuti_by_id' => $this->db->get_where('pengajuan_cuti', ['id_cuti' => $id_cuti])->row_array()
         ];
 
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
@@ -81,8 +81,8 @@ class Approval extends CI_Controller
             $this->template->load('template', 'approval/approval_edit', $data);
         } else {
             $data_cuti = [
-                'user_id' => $this->input->post('nama_pegawai'),
-                'divisi_id' => $this->input->post('divisi'),
+                'id_user' => $this->input->post('nama_pegawai'),
+                'id_divisi' => $this->input->post('divisi'),
                 'keperluan' => $this->input->post('keperluan'),
                 'lama' => $this->input->post('lama'),
                 'tgl_mulai' => $this->input->post('tgl_mulai'),
@@ -91,7 +91,7 @@ class Approval extends CI_Controller
                 'status' => $this->input->post('status')
             ];
 
-            $this->db->where('id', $id);
+            $this->db->where('id_cuti', $id_cuti);
             $this->db->update('pengajuan_cuti', $data_cuti);
             if ($this->db->affected_rows() > 0) {
                 echo "<script>
@@ -102,14 +102,20 @@ class Approval extends CI_Controller
         }
     }
 
-    public function del($id)
+    public function del($id_cuti)
     {
-        $this->tunggu_m->del($id);
+        $this->tunggu_m->del($id_cuti);
         if ($this->db->affected_rows() > 0) {
             echo "<script>
                 alert('Data cuti berhasil di hapus');
             </script>";
         }
         echo "<script>window.location='" . site_url('approval') . "';</script>";
+    }
+
+    public function lap_approval()
+    {
+        $data['data_cuti'] = $this->tunggu_m->get();
+        $this->template->load('template', 'approval/approval_lap', $data);
     }
 }

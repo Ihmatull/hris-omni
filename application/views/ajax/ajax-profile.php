@@ -7,7 +7,7 @@
         <a href="" class="update-data-pribadi" style="position: relative; top:15px;"><i class="fa fa-edit"></i> Edit Data Pribadi</a>
     </div>
     <h3 class="text-bold"><?= $this->fungsi->user_login()->nama_pegawai ?></h3>
-    <p class="text-bold"><?= $this->fungsi->user_login()->divisi_d ?></p>
+    <p class="text-bold"><?= $this->fungsi->user_login()->ket_divisi ?></p>
     <a class="btn btn-primary edit-password">Edit Password</a>
     <a class="btn btn-primary edit-username">Edit Username</a>
 </center>

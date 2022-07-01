@@ -37,7 +37,7 @@
                         <tr>
                             <td style="width: 5%;"><?= $no++ ?>.</td>
                             <td><?= $data->no_divisi ?></td>
-                            <td><?= $data->divisi_d ?></td>
+                            <td><?= $data->ket_divisi ?></td>
                             <td class="text-center" width="160px">
                                 <a href="<?= site_url('divisi/edit/' . $data->id_divisi) ?>" class="btn btn-primary btn-xs">
                                     <i class="fa fa-pencil"></i> Edit

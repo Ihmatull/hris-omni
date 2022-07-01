@@ -15,7 +15,7 @@ class Auth extends CI_Controller
         check_already_login();
         $this->load->view('login');
     }
-    
+
     public function process()
     {
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -26,19 +26,19 @@ class Auth extends CI_Controller
         } else {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
-            $users = $this->db->get_where('users', ['username' => $username])->row_array();
+            $user = $this->db->get_where('user', ['username' => $username])->row_array();
 
-            if (is_null($users)) {
+            if (is_null($user)) {
                 echo "<script>
                         alert ('Username belum terdaftar !');
                         window.location='" . site_url('auth/login') . "'; 
                     </script>";
             } else {
-                if (password_verify($password, $users['password'])) {
+                if ($password == $user['password']) {
                     $data = [
-                        'id_user' => $users['id'],
-                        'username' => $users['username'],
-                        'level_id' => $users['level_id']
+                        'id_user' => $user['id_user'],
+                        'username' => $user['username'],
+                        'id_level' => $user['id_level']
                     ];
                     $this->session->set_userdata($data);
                     echo "<script>
@@ -56,7 +56,7 @@ class Auth extends CI_Controller
     }
     public function logout()
     {
-        $params = array('username', 'level_id', 'id_user');
+        $params = array('username', 'id_level', 'id_user');
         $this->session->unset_userdata($params);
         redirect('auth/login');
     }

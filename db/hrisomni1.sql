@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 08, 2022 at 03:52 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.26
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 01 Jul 2022 pada 07.00
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hrisomni`
+-- Database: `hrisomni1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cities`
+-- Struktur dari tabel `cities`
 --
 
 CREATE TABLE `cities` (
-  `city_id` int(11) NOT NULL,
+  `id_city` int(11) NOT NULL,
   `city_name` varchar(255) DEFAULT NULL,
-  `prov_id` int(11) DEFAULT NULL
+  `id_prov` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `cities`
+-- Dumping data untuk tabel `cities`
 --
 
-INSERT INTO `cities` (`city_id`, `city_name`, `prov_id`) VALUES
+INSERT INTO `cities` (`id_city`, `city_name`, `id_prov`) VALUES
 (1, 'PIDIE JAYA', 1),
 (2, 'SIMEULUE', 1),
 (3, 'BIREUEN', 1),
@@ -517,59 +517,12 @@ INSERT INTO `cities` (`city_id`, `city_name`, `prov_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cuti`
---
-
-CREATE TABLE `cuti` (
-  `id_cuti` int(11) NOT NULL,
-  `no_cuti` varchar(20) NOT NULL,
-  `id_nama` int(11) NOT NULL,
-  `id_divisi` int(11) NOT NULL,
-  `keperluan` text NOT NULL,
-  `lama` int(200) NOT NULL,
-  `ket_lama` varchar(20) NOT NULL,
-  `mulai` date NOT NULL,
-  `sampai` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `data_k`
---
-
-CREATE TABLE `data_k` (
-  `id` int(11) NOT NULL,
-  `id_nama` varchar(100) NOT NULL,
-  `tgl_masuk` date NOT NULL,
-  `tempat` text NOT NULL,
-  `tgl_lahir` date NOT NULL,
-  `jk` text NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `nohp` int(20) NOT NULL,
-  `email` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_k`
---
-
-INSERT INTO `data_k` (`id`, `id_nama`, `tgl_masuk`, `tempat`, `tgl_lahir`, `jk`, `alamat`, `nohp`, `email`) VALUES
-(1, 'Ihmatull Muthmainnah', '2017-07-10', 'Semarang', '1998-07-23', 'P', 'Jl. Sri Rejeki Utara IV no 15 RT 003 RW 001, Kel Kalibanteng Kidul, Kec Semarang Barat', 896688126, 'e.ihmatull@gmail.com'),
-(2, 'Samuel Vittorio Rivaldo', '2017-12-02', 'Jakarta', '1999-09-10', 'L', 'Jl. Udowo Barat I no 29, Kel Bulu Lor, Kec Semarang Utara', 82242193, 'samuelvittorior@hotm'),
-(3, 'agus', '2020-06-17', 'Semarang', '1993-10-07', 'L', ' adafa', 8722689, 'vina@gmail.com'),
-(5, 'Nafa', '2021-01-04', 'Demak', '2007-01-29', 'P', 'ktryrytfk', 8722689, 'ema@gmail.com'),
-(6, 'Dita mawar', '2016-02-15', 'Semarang', '1998-07-08', 'P', 'jl pedurungan', 8765422, 'dita@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `data_karyawan`
+-- Struktur dari tabel `data_karyawan`
 --
 
 CREATE TABLE `data_karyawan` (
-  `id` int(11) NOT NULL,
-  `user_id` int(5) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `tgl_masuk` varchar(50) NOT NULL,
   `tgl_lahir` varchar(50) NOT NULL,
   `tempat_lahir` varchar(50) NOT NULL,
@@ -580,309 +533,201 @@ CREATE TABLE `data_karyawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_karyawan`
+-- Dumping data untuk tabel `data_karyawan`
 --
 
-INSERT INTO `data_karyawan` (`id`, `user_id`, `tgl_masuk`, `tgl_lahir`, `tempat_lahir`, `jenis_kelamin`, `alamat`, `nohp`, `email`) VALUES
-(13, 31, '2019-03-05', '1998-12-05', 'SEMARANG', 'L', 'KARANG JANGKANG, RT/RW -004/004, Kel/Desa NGEMPLAKSIMONGAN, Kecamatan SEMARANG BARAT', '0895627676500', 'bagus@gmail.com');
+INSERT INTO `data_karyawan` (`id_pegawai`, `id_user`, `tgl_masuk`, `tgl_lahir`, `tempat_lahir`, `jenis_kelamin`, `alamat`, `nohp`, `email`) VALUES
+(1, 1, '2017-07-10', '1998-07-23', 'SEMARANG', 'P', 'jl sri rejeki', '089668812670', 'e.ihmatull@gmail.com'),
+(2, 5, '2019-10-10', '1996-10-07', 'TEMANGGUNG', 'L', 'pedurungan kidul', '0895627676545', 'agung@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `divisi`
+-- Struktur dari tabel `divisi`
 --
 
 CREATE TABLE `divisi` (
   `id_divisi` int(11) NOT NULL,
   `no_divisi` varchar(20) NOT NULL,
-  `divisi_d` varchar(20) NOT NULL
+  `ket_divisi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `divisi`
+-- Dumping data untuk tabel `divisi`
 --
 
-INSERT INTO `divisi` (`id_divisi`, `no_divisi`, `divisi_d`) VALUES
-(7, 'D001', 'AR'),
-(8, 'D002', 'LOG'),
-(11, 'D003', 'MANAGER'),
-(12, 'D004', 'HRD');
+INSERT INTO `divisi` (`id_divisi`, `no_divisi`, `ket_divisi`) VALUES
+(1, 'D0001', 'Account Receivable'),
+(2, 'D0002', 'HR&GA'),
+(5, 'D0003', 'Logistic');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `level`
+-- Struktur dari tabel `level`
 --
 
 CREATE TABLE `level` (
-  `id` int(11) NOT NULL,
-  `level` varchar(50) NOT NULL
+  `id_level` int(11) NOT NULL,
+  `ket_level` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `level`
+-- Dumping data untuk tabel `level`
 --
 
-INSERT INTO `level` (`id`, `level`) VALUES
+INSERT INTO `level` (`id_level`, `ket_level`) VALUES
 (1, 'Admin'),
-(2, 'Staff');
+(2, 'Pegawai');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notif_staff`
+-- Struktur dari tabel `notif_staff`
 --
 
 CREATE TABLE `notif_staff` (
-  `id` int(11) NOT NULL,
-  `user_id` int(5) NOT NULL,
-  `cuti_id` int(5) NOT NULL,
+  `id_notif` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_cuti` int(11) NOT NULL,
   `status` int(1) NOT NULL,
   `approve_at` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `notif_staff`
---
-
-INSERT INTO `notif_staff` (`id`, `user_id`, `cuti_id`, `status`, `approve_at`) VALUES
-(8, 27, 32, 2, '07-02-2022'),
-(9, 27, 32, 1, '07-02-2022'),
-(10, 29, 33, 1, '07-02-2022'),
-(11, 31, 36, 0, '08-02-2022'),
-(12, 30, 35, 1, '08-02-2022'),
-(13, 31, 37, 1, '08-02-2022');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengajuan_cuti`
+-- Struktur dari tabel `pengajuan_cuti`
 --
 
 CREATE TABLE `pengajuan_cuti` (
-  `id` int(11) NOT NULL,
-  `user_id` int(5) NOT NULL,
-  `divisi_id` int(5) NOT NULL,
+  `id_cuti` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_divisi` int(11) NOT NULL,
   `keperluan` varchar(255) NOT NULL,
   `lama` varchar(50) NOT NULL,
   `tgl_mulai` varchar(50) NOT NULL,
   `tgl_sampai` varchar(50) NOT NULL,
   `keterangan` text NOT NULL,
-  `status` int(1) DEFAULT NULL,
+  `status` int(1) NOT NULL,
   `created_at` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pengajuan_cuti`
---
-
-INSERT INTO `pengajuan_cuti` (`id`, `user_id`, `divisi_id`, `keperluan`, `lama`, `tgl_mulai`, `tgl_sampai`, `keterangan`, `status`, `created_at`) VALUES
-(35, 30, 7, 'Cuti Hamil', '3 Bulan', '02/11/2022', '5/11/2022', 'Hamil bos', 1, '08-02-2022'),
-(36, 31, 8, 'Cuti Sakit', '2 Hari', '02/09/2022', '02/11/2022', 'Sakit bos', 0, '08-02-2022'),
-(37, 31, 8, 'Cuti Hamil', '3 Bulan', '02/09/2022', '5/9/2022', 'Bagus hamil bos', 1, '08-02-2022');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `no_user` varchar(20) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `id_nama` int(11) NOT NULL,
-  `id_divisi` int(11) NOT NULL,
-  `level` int(20) NOT NULL COMMENT '1 : admin, 2 : staff'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id_user`, `no_user`, `username`, `password`, `id_nama`, `id_divisi`, `level`) VALUES
-(13, 'U001', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 7, 1),
-(14, 'U002', 'rio', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 2, 8, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `nama_pegawai` varchar(150) NOT NULL,
+  `nama_pegawai` varchar(100) NOT NULL,
   `gambar` varchar(50) NOT NULL,
-  `username` varchar(150) NOT NULL,
-  `password` varchar(150) NOT NULL,
-  `divisi_id` int(1) NOT NULL,
-  `level_id` int(1) NOT NULL
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `id_divisi` int(11) NOT NULL,
+  `id_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `users` (`id`, `nama_pegawai`, `gambar`, `username`, `password`, `divisi_id`, `level_id`) VALUES
-(30, 'Ihmatull Muthmainnah', 'avatar-52.png', 'admin3', '$2y$10$wH280XD8sg6N15DF8NXQ/eVZla25lziY/bpOvbO77PaBDuVAs5F3e', 7, 2),
-(31, 'Bagus', 'baju71.png', 'admin4', '$2y$10$NA5vMz5JAiEDjJPN.Z4ppOe.8qk017PqDkni2is4.x7tivMtmEE16', 8, 2),
-(32, 'Ema ', 'default.png', 'admin1', '$2y$10$./0Tmi175yXeHY4oudSf7u87HSndeMtm2Jemm4v5CwKDJGMeULa22', 11, 1),
-(33, 'Ganang', 'default.png', 'admin2', '$2y$10$41ubnpfS8Xk8un9WuMJ22unSB2TZmo0OPIHkCg.sqwFWNO5knch96', 12, 1);
+INSERT INTO `user` (`id_user`, `nama_pegawai`, `gambar`, `username`, `password`, `id_divisi`, `id_level`) VALUES
+(1, 'Ihmatull Muthmainnah', '457933211.jpg', 'ar1', 'ihmatull', 1, 1),
+(5, 'Agung w', 'gambar2121.png', 'hr1', '$2y$10$tF1poTRQJ1W3gE/0q/ZKfO3ymQR5Z0uwxjQTqCtHhpybesHE8sqde', 2, 2);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `cities`
+-- Indeks untuk tabel `cities`
 --
 ALTER TABLE `cities`
-  ADD PRIMARY KEY (`city_id`) USING BTREE;
+  ADD PRIMARY KEY (`id_city`) USING BTREE;
 
 --
--- Indexes for table `cuti`
---
-ALTER TABLE `cuti`
-  ADD PRIMARY KEY (`id_cuti`),
-  ADD UNIQUE KEY `no_cuti` (`no_cuti`),
-  ADD KEY `id_divisi` (`id_divisi`),
-  ADD KEY `cuti_ibfk_2` (`id_nama`);
-
---
--- Indexes for table `data_k`
---
-ALTER TABLE `data_k`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `data_karyawan`
+-- Indeks untuk tabel `data_karyawan`
 --
 ALTER TABLE `data_karyawan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pegawai`);
 
 --
--- Indexes for table `divisi`
+-- Indeks untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
-  ADD PRIMARY KEY (`id_divisi`),
-  ADD UNIQUE KEY `no_divisi` (`no_divisi`);
+  ADD PRIMARY KEY (`id_divisi`);
 
 --
--- Indexes for table `level`
+-- Indeks untuk tabel `level`
 --
 ALTER TABLE `level`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_level`);
 
 --
--- Indexes for table `notif_staff`
+-- Indeks untuk tabel `notif_staff`
 --
 ALTER TABLE `notif_staff`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_notif`);
 
 --
--- Indexes for table `pengajuan_cuti`
+-- Indeks untuk tabel `pengajuan_cuti`
 --
 ALTER TABLE `pengajuan_cuti`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_cuti`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `no_user` (`no_user`),
-  ADD KEY `id_nama` (`id_nama`),
-  ADD KEY `id_divisi` (`id_divisi`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `cities`
+-- AUTO_INCREMENT untuk tabel `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
+  MODIFY `id_city` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
 
 --
--- AUTO_INCREMENT for table `cuti`
---
-ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `data_k`
---
-ALTER TABLE `data_k`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `data_karyawan`
+-- AUTO_INCREMENT untuk tabel `data_karyawan`
 --
 ALTER TABLE `data_karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `divisi`
+-- AUTO_INCREMENT untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
-  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `level`
+-- AUTO_INCREMENT untuk tabel `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `notif_staff`
+-- AUTO_INCREMENT untuk tabel `notif_staff`
 --
 ALTER TABLE `notif_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_notif` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pengajuan_cuti`
+-- AUTO_INCREMENT untuk tabel `pengajuan_cuti`
 --
 ALTER TABLE `pengajuan_cuti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `cuti`
---
-ALTER TABLE `cuti`
-  ADD CONSTRAINT `cuti_ibfk_1` FOREIGN KEY (`id_divisi`) REFERENCES `divisi` (`id_divisi`),
-  ADD CONSTRAINT `cuti_ibfk_2` FOREIGN KEY (`id_nama`) REFERENCES `data_k` (`id`);
-
---
--- Constraints for table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_nama`) REFERENCES `data_k` (`id`),
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_divisi`) REFERENCES `divisi` (`id_divisi`);
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

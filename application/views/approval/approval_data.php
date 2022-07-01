@@ -50,14 +50,14 @@
                                 <td class="text-bold"><?= $no++; ?></td>
                             <?php endif; ?>
                             <td><?= $cuti['nama_pegawai']; ?></td>
-                            <td><?= $cuti['divisi_d']; ?></td>
+                            <td><?= $cuti['ket_divisi']; ?></td>
                             <td><?= $cuti['keperluan']; ?></td>
                             <td><?= $cuti['lama']; ?></td>
                             <td><?= $cuti['tgl_mulai']; ?></td>
                             <td><?= $cuti['tgl_sampai']; ?></td>
                             <td><?= $cuti['keterangan']; ?></td>
                             <td>
-                                <select class="form-control form-control-sm w-3 status" data-userid="<?= $cuti['user_id']; ?>" data-id="<?= $cuti['id']; ?>">
+                                <select class="form-control form-control-sm w-3 status" data-userid="<?= $cuti['id_user']; ?>" data-id="<?= $cuti['id_user']; ?>">
                                     <option>Status</option>
                                     <?php if ($cuti['status'] == 1) : ?>
                                         <option value="1" selected>Setujui</option>
@@ -75,18 +75,18 @@
                                 </select>
                             </td>
                             <td class="text-center" width="160px">
-                                <?php if ($this->session->userdata('id_user') == $cuti['user_id']) : ?>
-                                    <a href="<?= site_url() ?>approval/edit/<?= $cuti['id']; ?>" class="btn btn-primary btn-xs">
+                                <?php if ($this->session->userdata('id_user') == $cuti['id_user']) : ?>
+                                    <a href="<?= site_url() ?>approval/edit/<?= $cuti['id_user']; ?>" class="btn btn-primary btn-xs">
                                         <i class="fa fa-pencil"></i> Update
                                     </a>
-                                    <a href="<?= site_url() ?>approval/del/<?= $cuti['id']; ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                    <a href="<?= site_url() ?>approval/del/<?= $cuti['id_user']; ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
                                         <i class="fa fa-trash"></i> Delete
                                     </a>
-                                <?php elseif ($this->session->userdata('level_id') == 1) : ?>
-                                    <a href="<?= site_url() ?>approval/edit/<?= $cuti['id']; ?>" class="btn btn-primary btn-xs">
+                                <?php elseif ($this->session->userdata('id_level') == 1) : ?>
+                                    <a href="<?= site_url() ?>approval/edit/<?= $cuti['id_user']; ?>" class="btn btn-primary btn-xs">
                                         <i class="fa fa-pencil"></i> Update
                                     </a>
-                                    <a href="<?= site_url() ?>approval/del/<?= $cuti['id']; ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                    <a href="<?= site_url() ?>approval/del/<?= $cuti['id_user']; ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
                                         <i class="fa fa-trash"></i> Delete
                                     </a>
                                 <?php endif; ?>
@@ -102,7 +102,7 @@
 
 <script>
     $(".status").change(function() {
-        const id_cuti = $(this).data("id");
+        const id_cuti = $(this).data("id_cuti");
         console.log($(this).val())
         switch ($(this).val()) {
             case "1":
@@ -114,7 +114,7 @@
                     dataType: "json",
                     data: {
                         id_cuti: id_cuti,
-                        user_id: $(this).data("userid"),
+                        id_user: $(this).data("iduser"),
                         status: $(this).val()
                     },
                     success: function(data) {

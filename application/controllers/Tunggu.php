@@ -19,12 +19,12 @@ class Tunggu extends CI_Controller
 
     public function add()
     {
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
             'levels' => $this->db->get('level')->result_array(),
-            'users' => $this->db->get('users')->result_array()
+            'users' => $this->db->get('user')->result_array()
         ];
 
 
@@ -39,8 +39,8 @@ class Tunggu extends CI_Controller
             $this->template->load('template', 'pengajuan/ajukan_form', $data);
         } else {
             $data_cuti = [
-                'user_id' => $this->input->post('nama_pegawai'),
-                'divisi_id' => $this->input->post('divisi'),
+                'id_user' => $this->input->post('nama_pegawai'),
+                'id_divisi' => $this->input->post('divisi'),
                 'keperluan' => $this->input->post('keperluan'),
                 'lama' => $this->input->post('lama'),
                 'tgl_mulai' => $this->input->post('tgl_mulai'),
@@ -62,13 +62,13 @@ class Tunggu extends CI_Controller
 
     public function edit($id)
     {
-        $this->db->select('id_divisi, divisi_d');
+        $this->db->select('id_divisi, ket_divisi');
         $this->db->from('divisi');
         $data = [
             'divisies' => $this->db->get()->result_array(),
             'levels' => $this->db->get('level')->result_array(),
-            'users' => $this->db->get('users')->result_array(),
-            'cuti_by_id' => $this->db->get_where('pengajuan_cuti', ['id' => $id])->row_array()
+            'users' => $this->db->get('user')->result_array(),
+            'cuti_by_id' => $this->db->get_where('pengajuan_cuti', ['id_cuti' => $id_cuti])->row_array()
         ];
 
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
@@ -82,8 +82,8 @@ class Tunggu extends CI_Controller
             $this->template->load('template', 'pengajuan/ajukan_form_edit', $data);
         } else {
             $data_cuti = [
-                'user_id' => $this->input->post('nama_pegawai'),
-                'divisi_id' => $this->input->post('divisi'),
+                'id_user' => $this->input->post('nama_pegawai'),
+                'id_divisi' => $this->input->post('divisi'),
                 'keperluan' => $this->input->post('keperluan'),
                 'lama' => $this->input->post('lama'),
                 'tgl_mulai' => $this->input->post('tgl_mulai'),
@@ -92,7 +92,7 @@ class Tunggu extends CI_Controller
                 'status' => $this->input->post('status')
             ];
 
-            $this->db->where('id', $id);
+            $this->db->where('id_cuti', $id_cuti);
             $this->db->update('pengajuan_cuti', $data_cuti);
             if ($this->db->affected_rows() > 0) {
                 echo "<script>
@@ -103,9 +103,9 @@ class Tunggu extends CI_Controller
         }
     }
 
-    public function del($id)
+    public function del($id_cuti)
     {
-        $this->tunggu_m->del($id);
+        $this->tunggu_m->del($id_cuti);
         if ($this->db->affected_rows() > 0) {
             echo "<script>
                 alert('Data cuti berhasil di hapus');
@@ -117,12 +117,12 @@ class Tunggu extends CI_Controller
     public function ubah_status()
     {
         $id_cuti = $_POST['id_cuti'];
-        $user_id = $_POST['user_id'];
+        $user_id = $_POST['id_user'];
         $status = $_POST['status'];
 
         $data = [
-            'user_id' => $user_id,
-            'cuti_id' => $id_cuti,
+            'id_user' => $id_user,
+            'id_cuti' => $id_cuti,
             'status' => $status,
             'approve_at' => date('d-m-Y')
         ];
@@ -130,7 +130,7 @@ class Tunggu extends CI_Controller
 
         if ($this->input->is_ajax_request()) {
             $this->db->set('status', $status);
-            $this->db->where('id', $id_cuti);
+            $this->db->where('id_cuti', $id_cuti);
             $this->db->update('pengajuan_cuti');
 
             $this->db->insert('notif_staff', $data);
